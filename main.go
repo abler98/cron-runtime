@@ -24,6 +24,10 @@ var (
 func main() {
 	parseFlags()
 
+	log.Logger = log.Output(zerolog.NewConsoleWriter(func(w *zerolog.ConsoleWriter) {
+		w.TimeFormat = time.DateTime
+	}))
+
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	if *debug {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
@@ -138,10 +142,6 @@ func main() {
 func parseFlags() {
 	flag.Usage = usage
 	flag.Parse()
-
-	log.Logger = log.Output(zerolog.NewConsoleWriter(func(w *zerolog.ConsoleWriter) {
-		w.TimeFormat = time.DateTime
-	}))
 
 	if flag.NArg() < 3 {
 		usageError("invalid number of arguments")

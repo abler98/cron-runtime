@@ -1,4 +1,4 @@
-module cron-runtime
+module github.com/abler98/cron-runtime
 
 go 1.21
 
